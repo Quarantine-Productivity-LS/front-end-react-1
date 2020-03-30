@@ -12,7 +12,7 @@ const App = () => {
       <Header />
       <Switch>
         <PrivateRoute path="/tasks" component={TaskList} />
-        <Route path="/"><FormikoginPage /></Route>
+        <Route path="/"><FormikLoginPage /></Route>
       </Switch>
     </div>
   );
