@@ -1,5 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { PrivateRoute } from './utils/PrivateRoute'
+import Header from './components/Header'
 import TaskList from './components/TaskList'
 import FormikLoginPage from './components/LoginPage'
 import './App.css';
@@ -7,10 +9,10 @@ import './App.css';
 const App = () => {
   return (
     <div>
+      <Header />
       <Switch>
-        {/* todo: TaskList route needs to be private */}
-        <Route path="/tasks"><TaskList /></Route>
-        <Route path="/"><FormikLoginPage /></Route>
+        <PrivateRoute path="/tasks" component={TaskList} />
+        <Route path="/"><FormikoginPage /></Route>
       </Switch>
     </div>
   );
