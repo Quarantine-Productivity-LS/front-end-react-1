@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Task from './Task'
+import TaskForm from './TaskForm'
 import { connect } from 'react-redux'
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import classnames from 'classnames'
@@ -76,6 +77,7 @@ const TaskList = props => {
                     )
                 })}
                 </TabContent>
+                <TaskForm />
             </div>
         </div>
     )

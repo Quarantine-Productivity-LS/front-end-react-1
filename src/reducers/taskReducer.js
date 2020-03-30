@@ -1,4 +1,4 @@
-import { TOGGLE_COMPLETION } from '../actions/taskActions'
+import { TOGGLE_COMPLETION, ADD_TASK } from '../actions/taskActions'
 
 const initialState = {
     loginPage: {
@@ -31,6 +31,12 @@ const initialState = {
 export const taskReducer = (state = initialState, action) => {
     switch(action.type) {
         case TOGGLE_COMPLETION:
+            return {
+                ...state,
+                loginPage: {...state.loginPage},
+                tasks: action.payload
+            }
+        case ADD_TASK:
             return {
                 ...state,
                 loginPage: {...state.loginPage},
