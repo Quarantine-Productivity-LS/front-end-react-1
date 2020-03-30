@@ -60,7 +60,7 @@ const TaskList = props => {
                 </Nav>
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="all">
-                        {props.tasks.map(task => <Task task={task}/>)}
+                        {props.tasks.map(task => <Task task={task} toggleTag={toggle}/>)}
                     </TabPane>
                     {allTags.map(selectedTag => {
                     return (
@@ -70,7 +70,7 @@ const TaskList = props => {
                                 task.tags.forEach(tag => {
                                     if (tag === selectedTag) match = true;
                                 })
-                                return (match && <Task task={task}/>)
+                                return (match && <Task task={task} toggleTag={toggle}/>)
                             })}
                         </TabPane>
                     )
