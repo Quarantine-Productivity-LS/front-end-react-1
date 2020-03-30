@@ -1,9 +1,10 @@
 import React from 'react'
+import './Task.css'
 
-const Task = () => {
+const Task = props => {
     return (
-        <div>
-            Task Component
+        <div className="task-container">
+            <div>{props.task.name}</div>
         </div>
     )
 }

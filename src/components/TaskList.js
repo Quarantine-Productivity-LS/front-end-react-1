@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import Task from './Task'
 import { connect } from 'react-redux'
-import { Nav, NavItem, NavLink } from 'reactstrap'
+import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
 import classnames from 'classnames'
 import './TaskList.css'
 
@@ -57,6 +58,24 @@ const TaskList = props => {
                         </NavItem>
                     ))}
                 </Nav>
+                <TabContent activeTab={activeTab}>
+                    <TabPane tabId="all">
+                        {props.tasks.map(task => <Task task={task}/>)}
+                    </TabPane>
+                    {allTags.map(selectedTag => {
+                    return (
+                        <TabPane tabId={selectedTag}>
+                            {props.tasks.map(task => {
+                                let match = false;
+                                task.tags.forEach(tag => {
+                                    if (tag === selectedTag) match = true;
+                                })
+                                return (match && <Task task={task}/>)
+                            })}
+                        </TabPane>
+                    )
+                })}
+                </TabContent>
             </div>
         </div>
     )
