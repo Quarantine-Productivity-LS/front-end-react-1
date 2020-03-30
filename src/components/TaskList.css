@@ -1,0 +1,13 @@
+.task-list-container {
+    display:flex;
+    justify-content:center;
+}
+
+.task-list {
+    border:1px solid lightgray;
+    border-radius:5px;
+    min-width:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}

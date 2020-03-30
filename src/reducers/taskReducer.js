@@ -4,7 +4,18 @@ const initialState = {
         error: ""
     },
     username: "",
-    tasks : [],
+    tasks : [
+        {
+            name: "Welcome to Quarantine Productivity",
+            tags: ["React"],
+            completed: false
+        },
+        {
+            name: "Try adding a task",
+            tags: ["Productivity", "React"],
+            completed: false
+        }
+    ],
 }
 
 export const taskReducer = (state = initialState, action) => {
