@@ -4,10 +4,12 @@ import TaskList from './components/TaskList'
 import FormikLoginPage from './components/LoginPage'
 import FormikRegisterPage from './components/Register'
 import './App.css';
+import Header from './components/Header'
 
 const App = () => {
   return (
     <div>
+      <Header/>
       <Switch>
         {/* todo: TaskList route needs to be private */}
         <Route path="/tasks"><TaskList /></Route>
