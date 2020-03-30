@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import TaskList from './components/TaskList'
-import LoginPage from './components/LoginPage'
+import FormikLoginPage from './components/LoginPage'
 import './App.css';
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
       <Switch>
         {/* todo: TaskList route needs to be private */}
         <Route path="/tasks"><TaskList /></Route>
-        <Route path="/"><LoginPage /></Route>
+        <Route path="/"><FormikLoginPage /></Route>
       </Switch>
     </div>
   );
