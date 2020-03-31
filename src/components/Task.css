@@ -1,30 +1,9 @@
 .task-container {
     display:flex;
-    flex-direction:column;
-    max-height:2.1rem;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.task-container:hover {
-    background-color:#FAFAFA;
-    cursor:pointer;
-}
-
-.show-all {
-    max-height:5rem;
-}
-
-.shown-info {
-    display:flex;
     justify-content:space-between;
     align-items:center;
     border-top:1px solid lightgray;
     padding:5px;
-}
-
-.hidden-info {
-    margin-left:1.5rem;
 }
 
 .task {
