@@ -11,7 +11,6 @@ const App = () => {
     <div className="appPage">
       <Header/>
       <Switch>
-        {/* todo: TaskList route needs to be private */}
         <Route path="/tasks"><TaskList /></Route>
         <Route exact path="/"><FormikLoginPage /></Route>
         <Route path="/register"><FormikRegisterPage /></Route>
