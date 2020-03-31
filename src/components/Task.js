@@ -34,7 +34,11 @@ const Task = props => {
             </div>
             <div className="hidden-info">
                 {props.task.description}
-                {props.isDeleting? <Spinner size="sm" color="danger" /> : <Button onClick={handleDelete} size="sm" color="danger">Delete</Button>}
+                <div>
+                    {props.isDeleting ? 
+                    <Spinner size="sm" color="danger" /> : 
+                    <Button onClick={handleDelete} size="sm" color="danger">Delete</Button>}
+                </div>
             </div>
         </div>
     )

@@ -41,7 +41,7 @@
 }
 
 .task-form form.open {
-    height:180px;
+    height:270px;
 }
 
 .inputs {
@@ -62,10 +62,15 @@
     transition:.2s;
 }
 
-.input input {
+.input input, .input textarea {
     width:78%;
     border-radius:5px;
     outline:none;
     border:1px solid lightgray;
     padding:2px;
+}
+
+.input textarea {
+    height:4rem;
+    resize:none;
 }

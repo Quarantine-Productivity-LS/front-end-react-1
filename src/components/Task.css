@@ -29,6 +29,12 @@
     font-weight:lighter;
 }
 
+.hidden-info > div:last-child {
+    display:flex;
+    justify-content:center;
+    width:10%;
+}
+
 .task {
     display:flex;
     align-items:center;
@@ -40,7 +46,6 @@
     color:gray;
     font-size:.8rem;
     display:flex;
-    align-items:center;
     width:35%;
 }
 

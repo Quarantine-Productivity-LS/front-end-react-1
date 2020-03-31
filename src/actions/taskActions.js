@@ -29,7 +29,6 @@ export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: POST_DATA })
     const newTask = {
         ...values,
-        description: "description",
         tags: values.tags.replace(" ", ""),
         duration: 0,
         completed: false

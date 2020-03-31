@@ -9,6 +9,7 @@ const TaskForm = props => {
     const [failure, setFailure] = useState(false);
     const [values, setValues] = useState({
         taskName: "",
+        description: "",
         tags: "",
         due: ""
     })
@@ -46,6 +47,7 @@ const TaskForm = props => {
             props.addTask(props.tasks, values);
             setValues({
                 taskName: "",
+                description: "",
                 tags: "",
                 due: "",
             })
@@ -74,6 +76,10 @@ const TaskForm = props => {
                     <div className="input" onClick={e => e.stopPropagation()}>
                         <label htmlFor="due">Due by</label>
                         <input type="date" id="due" name="due" onChange={handleChanges} value={values.due}/>
+                    </div>
+                    <div className="input" onClick={e => e.stopPropagation()}>
+                        <label htmlFor="description">Notes</label>
+                        <textarea type="text" id="description" name="description" onChange={handleChanges} value={values.description}/>
                     </div>
                     <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" color="primary">Add Task</Button>}</div>
                 </div>
