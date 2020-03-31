@@ -19,8 +19,8 @@ const TaskList = props => {
     useEffect(() => getData(), [getData])
 
     useEffect(() => {
+        console.log(props.tasks);
         const findTags = () => {
-            console.log(props.tasks);
             let tags = [];
             props.tasks.forEach(task => {
                 task.tags.split(",").forEach(taskTag => {

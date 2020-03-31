@@ -1,8 +1,10 @@
-import { TOGGLE_COMPLETION, ADD_TASK, FETCH_DATA, SET_ALL_TASKS } from '../actions/taskActions'
+import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS } from '../actions/taskActions'
 
 const initialState = {
     data: {
         isFetching: false,
+        isPosting: false,
+        isDeleting: false,
         error: ""
     },
     username: "",
@@ -44,22 +46,34 @@ export const taskReducer = (state = initialState, action) => {
                     isFetching: true
                 }
             }
+        case POST_DATA:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    isPosting: true
+                }
+            }
+        case DELETE_DATA:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    isDeleting: true
+                }
+            }
         case SET_ALL_TASKS:
             return {
                 ...state,
                 tasks: action.payload,
                 data: {
                     ...state.data,
-                    isFetching: false
+                    isFetching: false,
+                    isPosting: false,
+                    isDeleting: false,
                 }
             }
         case TOGGLE_COMPLETION:
-            return {
-                ...state,
-                data: {...state.data},
-                tasks: action.payload
-            }
-        case ADD_TASK:
             return {
                 ...state,
                 data: {...state.data},
