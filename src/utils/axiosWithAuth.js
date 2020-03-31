@@ -2,10 +2,9 @@ import axios from "axios";
 
 export const axiosWithAuth = () => {
   return axios.create({
-    // todo: get base api endpoint
-    // baseURL: "http://localhost:5000",
+    baseURL: "quarantine-productivity.herokuapp.com/api",
     headers: {
-      Authorization: JSON.parse(localStorage.getItem("token"))
+      // Authorization: JSON.parse(localStorage.getItem("token"))
     }
   });
 };
