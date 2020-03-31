@@ -8,7 +8,7 @@ import Header from './components/Header'
 
 const App = () => {
   return (
-    <div>
+    <div className="appPage">
       <Header/>
       <Switch>
         {/* todo: TaskList route needs to be private */}
