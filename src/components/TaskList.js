@@ -49,7 +49,7 @@ const TaskList = props => {
                         </NavLink>
                     </NavItem>
                     {allTags.map(tag => (
-                        <NavItem>
+                        <NavItem key={`${tag}`}>
                             <NavLink
                             className={classnames({ active: activeTab === tag })}
                             onClick={() => { toggle(tag); }}
@@ -61,17 +61,17 @@ const TaskList = props => {
                 </Nav>
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="all">
-                        {props.tasks.map(task => <Task task={task} toggleTag={toggle} activeTab={activeTab}/>)}
+                        {props.tasks.map(task => <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>)}
                     </TabPane>
                     {allTags.map(selectedTag => {
                     return (
-                        <TabPane tabId={selectedTag}>
+                        <TabPane tabId={selectedTag} key={selectedTag}>
                             {props.tasks.map(task => {
                                 let match = false;
                                 task.tags.forEach(tag => {
                                     if (tag === selectedTag) match = true;
                                 })
-                                return (match && <Task task={task} toggleTag={toggle} activeTab={activeTab}/>)
+                                return (match && <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>)
                             })}
                         </TabPane>
                     )

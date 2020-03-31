@@ -12,7 +12,9 @@ export const toggleCompletion = (tasks, id) => dispatch => {
 
 export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: ADD_TASK, payload: [...tasks, {
+        id: tasks[tasks.length - 1].id + 1,
         ...values,
-        tags: values.tags.split(",")
+        tags: values.tags.split(","),
+        completed: false
     }]});
 }
