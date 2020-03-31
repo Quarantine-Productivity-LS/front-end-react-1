@@ -44,6 +44,11 @@ const TaskForm = props => {
         event.preventDefault();
         if (values.taskName.length > 0) {
             props.addTask(props.tasks, values);
+            setValues({
+                taskName: "",
+                tags: "",
+                due: "",
+            })
         }
         else {
             setFailure(true);

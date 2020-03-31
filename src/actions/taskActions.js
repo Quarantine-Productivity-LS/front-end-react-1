@@ -30,6 +30,7 @@ export const addTask = (tasks, values) => dispatch => {
     const newTask = {
         ...values,
         description: "description",
+        tags: values.tags.replace(" ", ""),
         duration: 0,
         completed: false
     }
