@@ -25,12 +25,13 @@
     margin-left:1.5rem;
     display:flex;
     justify-content:space-between;
+    font-weight:lighter;
 }
 
 .task {
     display:flex;
     align-items:center;
-    width:50%;
+    width:45%;
 }
 
 .tags {
@@ -38,7 +39,7 @@
     color:gray;
     font-size:.8rem;
     display:flex;
-    width:30%;
+    width:35%;
 }
 
 .tag {
@@ -51,7 +52,6 @@
 .tag:hover, .active-tag {
     border:.05rem solid cornflowerblue;
     color:cornflowerblue;
-    cursor: pointer;
 }
 
 .checkbox {
