@@ -1,4 +1,18 @@
 .task-container {
+    max-height:2.2rem;
+    overflow:hidden;
+}
+
+.task-container:hover {
+    cursor:pointer;
+    background-color:#FAFAFA;
+}
+
+.expanded {
+    max-height:5rem;
+}
+
+.shown-info {
     display:flex;
     justify-content:space-between;
     align-items:center;
