@@ -1,11 +1,37 @@
-import React from 'react'
+import React, { useState } from "react";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
-const Header = () => {
-    return (
-        <div>
-            Header Component
-        </div>
-    )
-}
+const Header = props => {
+  const [isOpen, setIsOpen] = useState(false);
 
-export default Header
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">Quarantine Productivity</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <Link to="/">Login</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/register">Register</Link>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
+};
+
+export default Header;

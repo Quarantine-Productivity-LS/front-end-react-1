@@ -4,10 +4,16 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
-const LoginPage = ({ errors, touched, isSubmitting }) => {
+const RegisterPage = ({ touched, errors, isSubmitting }) => {
   return (
     <Form>
-      <h5>Login</h5>
+      <h5>Register</h5>
+      <Field name="fname" type="text" placeholder="First Name"></Field>
+      {touched.fname && errors.fname && <span>{" " + errors.fname}</span>}
+      <br />
+      <Field name="lname" type="text" placeholder="Last Name"></Field>
+      {touched.lname && errors.lname && <span>{" " + errors.lname}</span>}
+      <br />
       <Field name="email" type="email" placeholder="Email"></Field>
       {touched.email && errors.email && <span>{" " + errors.email}</span>}
       <br />
@@ -20,17 +26,19 @@ const LoginPage = ({ errors, touched, isSubmitting }) => {
         Submit
       </Button>
       <p>
-        Need an account? <Link to="/register">Register</Link>
+        Already registered? <Link to="/">Login</Link>
       </p>
     </Form>
   );
 };
 
-const FormikLoginPage = withFormik({
-  mapPropsToValues({ email, password }) {
+const FormikRegisterPage = withFormik({
+  mapPropsToValues({ email, password, fname, lname }) {
     return {
       email: email || "",
-      password: password || ""
+      password: password || "",
+      fname: fname || "",
+      lname: lname || ""
     };
   },
   validationSchema: Yup.object().shape({
@@ -39,7 +47,9 @@ const FormikLoginPage = withFormik({
       .required("Email is required."),
     password: Yup.string()
       .min(4)
-      .required()
+      .required(),
+    fname: Yup.string().required("First name is required."),
+    lname: Yup.string().required("Last name is required.")
   }),
   handleSubmit(values,{resetForm, setErrors, setSubmitting}) {
     setTimeout(() => {
@@ -51,6 +61,6 @@ const FormikLoginPage = withFormik({
         setSubmitting(false)
       }, 1000)
   }
-})(LoginPage);
+})(RegisterPage);
 
-export default FormikLoginPage;
+export default FormikRegisterPage;

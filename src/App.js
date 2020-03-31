@@ -4,7 +4,9 @@ import { PrivateRoute } from './utils/PrivateRoute'
 import Header from './components/Header'
 import TaskList from './components/TaskList'
 import FormikLoginPage from './components/LoginPage'
+import FormikRegisterPage from './components/Register'
 import './App.css';
+import Header from './components/Header'
 
 const App = () => {
   return (
