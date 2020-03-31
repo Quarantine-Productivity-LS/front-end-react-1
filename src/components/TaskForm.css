@@ -37,7 +37,6 @@
 }
 
 .task-form form button {
-    margin-top:10px;
     background-color:cornflowerblue;
 }
 
@@ -55,12 +54,18 @@
     display:flex;
     justify-content:space-between;
     width:35%;
+    margin-bottom:10px;
 }
 
 .input label {
-    width:25%;
+    width:22%;
+    transition:.2s;
 }
 
 .input input {
-    width:75%;
+    width:78%;
+    border-radius:5px;
+    outline:none;
+    border:1px solid lightgray;
+    padding:2px;
 }

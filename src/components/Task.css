@@ -27,7 +27,7 @@
     margin-right:5px;
 }
 
-.tag:hover {
+.tag:hover, .active-tag {
     border:.05rem solid cornflowerblue;
     color:cornflowerblue;
     cursor: pointer;
@@ -55,6 +55,10 @@
 .completed {
     background-color:cornflowerblue;
     border:1px solid cornflowerblue;
+}
+
+.finished {
+    color:gray;
 }
 
 .checkmark {

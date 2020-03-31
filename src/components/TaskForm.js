@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { addTask } from '../actions/taskActions'
 import { Button } from 'reactstrap'
@@ -6,11 +6,31 @@ import './TaskForm.css'
 
 const TaskForm = props => {
     const [formClosed, setFormClosed] = useState(true);
+    const [failure, setFailure] = useState(false);
     const [values, setValues] = useState({
         name: "",
         tags: "",
         due: ""
     })
+
+    useEffect(() => {
+        if (props.activeTab !== "all") {
+            setValues(values => (
+                {
+                    ...values,
+                    tags: props.activeTab
+                }
+            ))
+        }
+        else {
+            setValues(values => (
+                {
+                    ...values,
+                    tags: ""
+                }
+            ));
+        }
+    }, [props.activeTab])
 
     const handleChanges = event => {
         event.stopPropagation();
@@ -22,7 +42,15 @@ const TaskForm = props => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        props.addTask(props.tasks, values);
+        if (values.name.length > 0) {
+            props.addTask(props.tasks, values);
+        }
+        else {
+            setFailure(true);
+            setTimeout(() => {
+                setFailure(false);
+            }, 2000)
+        }
     }
 
     return (
@@ -31,7 +59,7 @@ const TaskForm = props => {
             <form className={formClosed ? "" : "open"} autoComplete="off" onSubmit={handleSubmit}>
                 <div className="inputs">
                     <div className="input" onClick={e => e.stopPropagation()}>
-                        <label htmlFor="name">Task</label>
+                        <label style={failure ? {color:"red"} : {color:"black"}} htmlFor="name">Task</label>
                         <input type="text" id="name" name="name" onChange={handleChanges} value={values.name}/>
                     </div>
                     <div className="input" onClick={e => e.stopPropagation()}>
@@ -42,7 +70,7 @@ const TaskForm = props => {
                         <label htmlFor="due">Due by</label>
                         <input type="date" id="due" name="due" onChange={handleChanges} value={values.due}/>
                     </div>
-                    <Button color="primary">Add Task</Button>
+                    <div onClick={e => e.stopPropagation()}><Button type="submit" color="primary">Add Task</Button></div>
                 </div>
             </form>
         </div>

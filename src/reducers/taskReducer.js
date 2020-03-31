@@ -11,19 +11,22 @@ const initialState = {
             id: 1,
             name: "Welcome to Quarantine Productivity",
             tags: ["React"],
+            due: "2020-03-30",
             completed: false
         },
         {
             id: 2,
             name: "Try adding a task",
             tags: ["Productivity", "React"],
+            due: "2020-03-30",
             completed: false
         },
         {
             id: 3,
             name: "Separate tags in your task with commas",
             tags: ["App"],
-            completed: true
+            due: "2020-03-30",
+            completed: false
         }
     ],
 }
