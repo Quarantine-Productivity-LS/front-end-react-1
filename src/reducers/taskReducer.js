@@ -1,4 +1,4 @@
-import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS } from '../actions/taskActions'
+import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS, SET_ERROR } from '../actions/taskActions'
 
 const initialState = {
     data: {
@@ -43,7 +43,8 @@ export const taskReducer = (state = initialState, action) => {
                 ...state,
                 data: {
                     ...state.data,
-                    isFetching: true
+                    isFetching: !state.data.isFetching,
+                    error: ""
                 }
             }
         case POST_DATA:
@@ -51,7 +52,8 @@ export const taskReducer = (state = initialState, action) => {
                 ...state,
                 data: {
                     ...state.data,
-                    isPosting: true
+                    isPosting: !state.data.isPosting,
+                    error: ""
                 }
             }
         case DELETE_DATA:
@@ -59,7 +61,19 @@ export const taskReducer = (state = initialState, action) => {
                 ...state,
                 data: {
                     ...state.data,
-                    isDeleting: true
+                    isDeleting: !state.data.isDeleting,
+                    error: ""
+                }
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    isFetching: false,
+                    isPosting: false,
+                    isDeleting: false,
+                    [action.payload.key]: action.payload.error
                 }
             }
         case SET_ALL_TASKS:
@@ -71,6 +85,7 @@ export const taskReducer = (state = initialState, action) => {
                     isFetching: false,
                     isPosting: false,
                     isDeleting: false,
+                    error: ""
                 }
             }
         case TOGGLE_COMPLETION:

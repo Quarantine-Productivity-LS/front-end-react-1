@@ -77,7 +77,10 @@ const TaskList = props => {
                                     task.tags.split(",").forEach(tag => {
                                         if (tag === selectedTag) match = true;
                                     })
-                                    return (match && <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>)
+                                    return (match && 
+                                        (
+                                        <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>
+                                    ))
                                 })}
                             </TabPane>
                         )

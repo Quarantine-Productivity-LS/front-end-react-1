@@ -11,7 +11,8 @@ const TaskForm = props => {
         taskName: "",
         description: "",
         tags: "",
-        due: ""
+        due: "",
+        duration: "",
     })
 
     useEffect(() => {
@@ -74,6 +75,10 @@ const TaskForm = props => {
                         <input type="text" id="tags" name="tags" onChange={handleChanges} value={values.tags}/>
                     </div>
                     <div className="input" onClick={e => e.stopPropagation()}>
+                        <label htmlFor="duration">Duration</label>
+                        <input type="text" id="duration" name="duration" onChange={handleChanges} value={values.duration} placeholder="minutes"/>
+                    </div>
+                    <div className="input" onClick={e => e.stopPropagation()}>
                         <label htmlFor="due">Due by</label>
                         <input type="date" id="due" name="due" onChange={handleChanges} value={values.due}/>
                     </div>
@@ -82,6 +87,7 @@ const TaskForm = props => {
                         <textarea type="text" id="description" name="description" onChange={handleChanges} value={values.description}/>
                     </div>
                     <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" color="primary">Add Task</Button>}</div>
+                    <div>{(props.error.length > 0) && props.error}</div>
                 </div>
             </form>
         </div>
@@ -91,7 +97,8 @@ const TaskForm = props => {
 const mapStateToProps = state => {
     return {
         tasks: state.tasks,
-        isPosting: state.data.isPosting
+        isPosting: state.data.isPosting,
+        error: state.data.error
     }
 }
 

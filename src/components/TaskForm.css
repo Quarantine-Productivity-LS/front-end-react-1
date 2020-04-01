@@ -41,7 +41,7 @@
 }
 
 .task-form form.open {
-    height:270px;
+    height:300px;
 }
 
 .inputs {
@@ -53,6 +53,7 @@
 .input {
     display:flex;
     justify-content:space-between;
+    align-items:center;
     width:35%;
     margin-bottom:10px;
 }
@@ -63,7 +64,7 @@
 }
 
 .input input, .input textarea {
-    width:78%;
+    width:75%;
     border-radius:5px;
     outline:none;
     border:1px solid lightgray;
