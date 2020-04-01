@@ -44,3 +44,8 @@
 .nav-tabs:hover {
     cursor:pointer;
 }
+
+/* Spinner */
+.text-primary {
+    color:lightcoral!important;
+}

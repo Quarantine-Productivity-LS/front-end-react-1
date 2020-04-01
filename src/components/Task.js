@@ -15,8 +15,14 @@ const Task = props => {
         event.stopPropagation();
         props.deleteTask(props.tasks, props.task.id);
     }
+    const handleExpansion = event => {
+        if (props.formClosed === false) {
+            props.setFormClosed(true);
+        }
+        setExpanded(!expanded);
+    }
     return (
-        <div className={expanded ? "task-container expanded" : "task-container"} onClick={() => setExpanded(!expanded)}>
+        <div className={expanded ? "task-container expanded" : "task-container"} onClick={handleExpansion}>
             <div className={props.task.completed ? "shown-info finished" : "shown-info"}>
                 <div className="task">
                     <div className={props.task.completed ? "checkbox completed" : "checkbox"} onClick={handleCheck}>
@@ -30,7 +36,7 @@ const Task = props => {
                         props.toggleTag(tag);
                     }}>{tag}</div>)}
                 </div>
-                <div className="date"><Moment format="MMM Do, YYYY" date={props.task.due}/></div>
+                <div className="date">{(props.task.due === undefined) ? <div>${" "}</div> : <Moment format="MMM Do, YYYY" date={props.task.due}/>}</div>
             </div>
             <div className="hidden-info">
                 {props.task.description}

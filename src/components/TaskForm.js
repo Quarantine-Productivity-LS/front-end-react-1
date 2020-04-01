@@ -5,7 +5,6 @@ import { Button, Spinner } from 'reactstrap'
 import './TaskForm.css'
 
 const TaskForm = props => {
-    const [formClosed, setFormClosed] = useState(true);
     const [failure, setFailure] = useState(false);
     const [values, setValues] = useState({
         taskName: "",
@@ -62,9 +61,9 @@ const TaskForm = props => {
     }
 
     return (
-        <div className="task-form" onClick={() => setFormClosed(!formClosed)}>
-            <div className={formClosed ? "plus shown" : "plus hidden"}><i className="fas fa-plus" /></div>
-            <form className={formClosed ? "" : "open"} autoComplete="off" onSubmit={handleSubmit}>
+        <div className="task-form" onClick={() => props.setFormClosed(!props.formClosed)}>
+            <div className={props.formClosed ? "plus shown" : "plus hidden"}><i className="fas fa-plus" /></div>
+            <form className={props.formClosed ? "" : "open"} autoComplete="off" onSubmit={handleSubmit}>
                 <div className="inputs">
                     <div className="input" onClick={e => e.stopPropagation()}>
                         <label style={failure ? {color:"red"} : {color:"black"}} htmlFor="name">Task</label>

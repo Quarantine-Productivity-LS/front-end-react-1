@@ -47,10 +47,17 @@ export const toggleCompletion = (tasks, id) => dispatch => {
     })})
 }
 
+// taskName: "",
+// description: "",
+// tags: "",
+// due: "",
+// duration: "",
+
 export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: POST_DATA })
     const newTask = {
         ...values,
+        duration: (values.duration.length > 0) ? values.duration : null,
         tags: values.tags.split(" ").join(""),
         completed: false
     }

@@ -11,13 +11,16 @@ const TaskList = props => {
     const { getData } = props;
     const [activeTab, setActiveTab] = useState('all');
     const [allTags, setTags] = useState([]);
+    const [formClosed, setFormClosed] = useState(true);
 
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
+    // get data
     useEffect(() => getData(), [getData])
 
+    // set up tags
     useEffect(() => {
         console.log(props.tasks);
         const findTags = () => {
@@ -30,7 +33,7 @@ const TaskList = props => {
                             alreadyPresent = true;
                         }
                     })
-                    if (alreadyPresent === false) {
+                    if ((alreadyPresent === false) && (taskTag !== "")) {
                         tags.push(taskTag);
                     }
                 })
@@ -67,7 +70,7 @@ const TaskList = props => {
                     </Nav>
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="all">
-                            {props.tasks.map(task => <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>)}
+                            {props.tasks.map(task => <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>)}
                         </TabPane>
                         {allTags.map(selectedTag => {
                         return (
@@ -79,7 +82,7 @@ const TaskList = props => {
                                     })
                                     return (match && 
                                         (
-                                        <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>
+                                        <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
                                     ))
                                 })}
                             </TabPane>
@@ -87,7 +90,7 @@ const TaskList = props => {
                     })}
                     </TabContent>
                 </div>}
-                <TaskForm activeTab={activeTab} />
+                <TaskForm activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
             </div>
         </div>
     )
