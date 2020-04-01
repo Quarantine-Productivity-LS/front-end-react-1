@@ -11,9 +11,9 @@ const App = () => {
     <div className="appPage">
       <Header/>
       <Switch>
-        <Route path="/tasks"><TaskList /></Route>
-        <Route exact path="/"><FormikLoginPage /></Route>
+        <PrivateRoute path="/tasks" component={TaskList} />
         <Route path="/register"><FormikRegisterPage /></Route>
+        <Route path="/"><FormikLoginPage /></Route>
       </Switch>
     </div>
   );
