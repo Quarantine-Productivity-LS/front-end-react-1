@@ -36,7 +36,7 @@ const Task = props => {
                         props.toggleTag(tag);
                     }}>{tag}</div>)}
                 </div>
-                <div className="date">{(props.task.due === undefined) ? <div>${" "}</div> : <Moment format="MMM Do, YYYY" date={props.task.due}/>}</div>
+                <div className="date">{props.task.duration} minutes</div>
             </div>
             <div className="hidden-info">
                 {props.task.description}

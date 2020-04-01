@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Task from './Task'
+import Date from './Date'
 import TaskForm from './TaskForm'
 import { connect } from 'react-redux'
 import { Nav, NavItem, NavLink, TabContent, TabPane, Spinner } from 'reactstrap'
@@ -12,6 +13,7 @@ const TaskList = props => {
     const [activeTab, setActiveTab] = useState('all');
     const [allTags, setTags] = useState([]);
     const [formClosed, setFormClosed] = useState(true);
+    const [datesMap, setDatesMap] = useState([])
 
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
@@ -19,6 +21,38 @@ const TaskList = props => {
 
     // get data
     useEffect(() => getData(), [getData])
+
+    // set up dates
+    useEffect(() => {
+        let mostRecentDate = "";
+        let newDatesMap = [];
+        if (props.tasks.length > 0) {
+            console.log("got data", props.tasks);
+            mostRecentDate = props.tasks[0].due;
+            if (mostRecentDate !== null) {
+                newDatesMap.push({
+                    id: props.tasks[0].id,
+                    date: props.tasks[0].due
+                })
+            }
+            else {
+                newDatesMap.push({
+                    id: props.tasks[0].id,
+                    date: "Anytime"
+                })
+            }
+            props.tasks.forEach(task => {
+                if (task.due !== mostRecentDate) {
+                    console.log(task.due);
+                    newDatesMap.push({
+                        id: task.id,
+                        date: task.due
+                    })
+                }
+            })
+        }
+        setDatesMap(newDatesMap);
+    }, [props.tasks])
 
     // set up tags
     useEffect(() => {
@@ -42,7 +76,6 @@ const TaskList = props => {
         }
         findTags();
     }, [props.tasks])
-
     return (
         <div className="task-list-container">
             <div className="task-list">
@@ -70,7 +103,14 @@ const TaskList = props => {
                     </Nav>
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="all">
-                            {props.tasks.map(task => <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>)}
+                            {props.tasks.map(task => {
+                                return (
+                                    <div key={task.id}>
+                                        {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
+                                        <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                    </div>
+                                )
+                            })}
                         </TabPane>
                         {allTags.map(selectedTag => {
                         return (
@@ -81,8 +121,9 @@ const TaskList = props => {
                                         if (tag === selectedTag) match = true;
                                     })
                                     return (match && 
-                                        (
-                                        <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                        (<div>
+                                            <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                        </div>
                                     ))
                                 })}
                             </TabPane>

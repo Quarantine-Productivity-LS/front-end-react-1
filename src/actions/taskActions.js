@@ -59,6 +59,7 @@ export const addTask = (tasks, values) => dispatch => {
         ...values,
         duration: (values.duration.length > 0) ? values.duration : null,
         tags: values.tags.split(" ").join(""),
+        due: (values.due.length > 0) ? values.due : null,
         completed: false
     }
     axios.post("https://quarantine-productivity.herokuapp.com/api/tasks", newTask).then(response => {
