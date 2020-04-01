@@ -2,7 +2,6 @@ import axios from 'axios'
 import moment from 'moment'
 export const FETCH_DATA = "FETCH_DATA";
 export const POST_DATA = "POST_DATA";
-export const DELETE_DATA = "DELETE_DATA";
 export const EDIT_DATA = "EDIT_DATA";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALL_TASKS = "SET_ALL_TASKS";
@@ -52,7 +51,7 @@ export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: POST_DATA })
     const newTask = {
         ...values,
-        duration: (values.duration.length > 0) ? values.duration : null,
+        duration: (values.duration) ? values.duration : null,
         tags: values.tags.split(" ").join(""),
         due: (values.due.length > 0) ? values.due : null,
         completed: false
@@ -75,7 +74,7 @@ export const addTask = (tasks, values) => dispatch => {
 }
 
 export const deleteTask = (tasks, ID) => dispatch => {
-    dispatch({ type: DELETE_DATA })
+    dispatch({ type: EDIT_DATA })
     axios.delete(`https://quarantine-productivity.herokuapp.com/api/tasks/${ID}`).then(response => {
         console.log(response);
         dispatch({ type: SET_ALL_TASKS, payload: tasks.filter(task => (task.id !== ID)) })
@@ -93,13 +92,13 @@ export const editTask = (tasks, values) => dispatch => {
     dispatch({ type: EDIT_DATA })
     const newTask = {
         ...values,
-        duration: (values.duration.length > 0) ? values.duration : null,
+        duration: (values.duration === null || values.duration.length > 0) ? parseInt(values.duration) : null,
         tags: values.tags.split(" ").join(""),
         due: (values.due.length > 0) ? values.due : null,
         completed: false
     }
     console.log(newTask);
-    axios.put(`https://quarantine-productivity.herokuapp.com/api/tasks/${values.id}`, values).then(response => {
+    axios.put(`https://quarantine-productivity.herokuapp.com/api/tasks/${values.id}`, newTask).then(response => {
         console.log(response);
         dispatch({ type: SET_ALL_TASKS, payload: tasks.map(task => (task.id === values.id) ? newTask : task)})
     })

@@ -34,10 +34,10 @@
 .hidden-info > div:last-child {
     display:flex;
     justify-content:center;
-    width:15%;
+    width:25%;
 }
 
-.hidden-info > div:last-child div {
+.hidden-info > div:last-child .buttons {
     width:100%;
     display:flex;
     justify-content:center;
@@ -123,9 +123,15 @@
 .shown-info input, .hidden-info input {
     font-size:inherit;
     outline:none;
-    border:1px solid lightgray;
+    border:0;
+    background-color:inherit;
     border-radius:5px;
     padding:0;
+}
+
+.shown-info input:focus, .hidden-info input:focus {
+    background-color:white;
+    border:1px solid lightgray;
 }
 
 .shown-info input#tags {

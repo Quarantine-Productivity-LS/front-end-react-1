@@ -45,6 +45,7 @@ const Task = props => {
         event.stopPropagation();
         props.editTask(props.tasks, values);
         setEditing(false);
+        setExpanded(false);
     }
     return (
         <div className={expanded ? "task-container expanded" : "task-container"} onClick={handleExpansion}>
@@ -72,7 +73,7 @@ const Task = props => {
                 <div>
                     {props.isDeleting ? 
                     <Spinner size="sm" color="danger" /> : 
-                    <div>
+                    <div className="buttons">
                         <Button onClick={handleDelete} color="danger">Delete</Button>
                         {!editing ? <Button onClick={handleEdit} color="danger">Edit</Button> : <Button onClick={handleSave} color="danger">Save</Button>}
                     </div>}
