@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Moment from 'react-moment'
 import { toggleCompletion, deleteTask } from '../actions/taskActions'
 import { connect } from 'react-redux'
 import { Button, Spinner } from 'reactstrap'
@@ -36,9 +35,9 @@ const Task = props => {
                         props.toggleTag(tag);
                     }}>{tag}</div>)}
                 </div>
-                <div className="date">{props.task.duration} minutes</div>
+                <div className="duration">{(props.task.duration) ? `${props.task.duration} minutes` : " "}</div>
             </div>
-            <div className="hidden-info">
+            <div className="hidden-info" style={props.task.description.length > 0 ? {justifyContent: "space-between"} : {justifyContent: "center"}}>
                 {props.task.description}
                 <div>
                     {props.isDeleting ? 

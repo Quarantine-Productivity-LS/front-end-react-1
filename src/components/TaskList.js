@@ -121,8 +121,10 @@ const TaskList = props => {
                                         if (tag === selectedTag) match = true;
                                     })
                                     return (match && 
-                                        (<div>
-                                            <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                        (
+                                        <div key={task.id}>
+                                            {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
+                                            <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
                                         </div>
                                     ))
                                 })}
