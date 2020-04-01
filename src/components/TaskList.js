@@ -43,11 +43,11 @@ const TaskList = props => {
             }
             props.tasks.forEach(task => {
                 if (task.due !== mostRecentDate) {
-                    console.log(task.due);
                     newDatesMap.push({
                         id: task.id,
                         date: task.due
                     })
+                    mostRecentDate = task.due;
                 }
             })
         }
@@ -80,7 +80,7 @@ const TaskList = props => {
         <div className="task-list-container">
             <div className="task-list">
                 <h2>Tasks</h2>
-                {props.data.isFetching ? <Spinner color="primary"/> : <div className="nav-container">
+                {props.isFetching ? (<Spinner color="primary"/>) : <div className="nav-container">
                     <Nav tabs>
                         <NavItem>
                             <NavLink
@@ -120,13 +120,12 @@ const TaskList = props => {
                                     task.tags.split(",").forEach(tag => {
                                         if (tag === selectedTag) match = true;
                                     })
-                                    return (match && 
-                                        (
+                                    return (
                                         <div key={task.id}>
                                             {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
-                                            <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                            {match && <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>}
                                         </div>
-                                    ))
+                                    )
                                 })}
                             </TabPane>
                         )
@@ -142,9 +141,7 @@ const TaskList = props => {
 const mapStateToProps = state => {
     return {
         tasks: state.tasks,
-        data: {
-            isFetching: state.data.isFetching
-        }
+        isFetching: state.data.isFetching,
     }
 }
 

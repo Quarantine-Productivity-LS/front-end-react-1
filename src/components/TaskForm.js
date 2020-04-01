@@ -85,7 +85,7 @@ const TaskForm = props => {
                         <label htmlFor="description">Notes</label>
                         <textarea type="text" id="description" name="description" onChange={handleChanges} value={values.description}/>
                     </div>
-                    <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" >Add Task</Button>}</div>
+                    <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" color="danger">Add Task</Button>}</div>
                     <div>{(props.error.length > 0) && props.error}</div>
                 </div>
             </form>
@@ -97,7 +97,7 @@ const mapStateToProps = state => {
     return {
         tasks: state.tasks,
         isPosting: state.data.isPosting,
-        error: state.data.error
+        error: state.data.postError
     }
 }
 

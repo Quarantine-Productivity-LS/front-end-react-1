@@ -1,11 +1,14 @@
-import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS, SET_ERROR } from '../actions/taskActions'
+import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS, SET_ERROR, EDIT_DATA } from '../actions/taskActions'
 
 const initialState = {
     data: {
         isFetching: false,
         isPosting: false,
         isDeleting: false,
-        error: ""
+        isEditing: false,
+        fetchError: "",
+        postError: "",
+        deleteError: ""
     },
     username: "",
     tasks : [
@@ -62,6 +65,15 @@ export const taskReducer = (state = initialState, action) => {
                 data: {
                     ...state.data,
                     isDeleting: !state.data.isDeleting,
+                    error: ""
+                }
+            }
+        case EDIT_DATA:
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    isEditing: !state.data.isEditing,
                     error: ""
                 }
             }

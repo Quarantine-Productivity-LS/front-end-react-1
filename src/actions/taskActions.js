@@ -3,6 +3,7 @@ import moment from 'moment'
 export const FETCH_DATA = "FETCH_DATA";
 export const POST_DATA = "POST_DATA";
 export const DELETE_DATA = "DELETE_DATA";
+export const EDIT_DATA = "EDIT_DATA";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALL_TASKS = "SET_ALL_TASKS";
 export const TOGGLE_COMPLETION = "TOGGLE_COMPLETION";
@@ -32,7 +33,7 @@ export const getData = () => dispatch => {
     .catch(error => {
         console.log(error);
         dispatch({ type: SET_ERROR, payload: {
-            key: "isFetching",
+            key: "fetchError",
             error: error
         } })
     })
@@ -46,12 +47,6 @@ export const toggleCompletion = (tasks, id) => dispatch => {
         } : task)
     })})
 }
-
-// taskName: "",
-// description: "",
-// tags: "",
-// due: "",
-// duration: "",
 
 export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: POST_DATA })
@@ -73,7 +68,7 @@ export const addTask = (tasks, values) => dispatch => {
     .catch(error => {
         console.log(error);
         dispatch({ type: SET_ERROR, payload: {
-            key: "isPosting",
+            key: "postError",
             error: error
         } })
     })
@@ -88,8 +83,27 @@ export const deleteTask = (tasks, ID) => dispatch => {
     .catch(error => {
         console.log(error);
         dispatch({ type: SET_ERROR, payload: {
-            key: "isDeleting",
+            key: "deleteError",
             error: error
         } })
+    })
+}
+
+export const editTask = (tasks, values) => dispatch => {
+    dispatch({ type: EDIT_DATA })
+    const newTask = {
+        ...values,
+        duration: (values.duration.length > 0) ? values.duration : null,
+        tags: values.tags.split(" ").join(""),
+        due: (values.due.length > 0) ? values.due : null,
+        completed: false
+    }
+    console.log(newTask);
+    axios.put(`https://quarantine-productivity.herokuapp.com/api/tasks/${values.id}`, values).then(response => {
+        console.log(response);
+        dispatch({ type: SET_ALL_TASKS, payload: tasks.map(task => (task.id === values.id) ? newTask : task)})
+    })
+    .catch(error => {
+        console.log(error);
     })
 }
