@@ -51,7 +51,7 @@ export const addTask = (tasks, values) => dispatch => {
     dispatch({ type: POST_DATA })
     const newTask = {
         ...values,
-        tags: values.tags.replace(" ", ""),
+        tags: values.tags.split(" ").join(""),
         completed: false
     }
     axios.post("https://quarantine-productivity.herokuapp.com/api/tasks", newTask).then(response => {
