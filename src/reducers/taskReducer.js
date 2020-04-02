@@ -49,11 +49,44 @@ export const considerations = {
         "Do 50 pull-ups",
         "Wall-sits",
         "Do 50 crunches",
-        "Do 50 Russian twists"
+        "Do 50 Russian twists",
+        "Ride on eliptical bike",
+        "Ride bicycle around the neighborhood",
+        "Work out with dumbbells",
+        "Work out with a barbell",
+        "Do 10 sets of deadlifts"
     ],
     learning: [
-        "Watch a documentary",
-        "Read a chapter out of your favorite book"
+        "Watch a history documentary",
+        "Watch a nature documentary",
+        "Read a chapter out of your favorite book",
+        "Watch a 3D modeling tutorial",
+        "Watch a drawing tutorial",
+        "Learn about C++",
+        "Learn about C#",
+        "Learn about Python",
+        "Watch a YouTube science show",
+        "Research an interesting topic",
+        "Look up math exercises",
+        "Practice an instrument",
+        "Read through the news"
+
+    ],
+    lounging: [
+        "Make a sandwich",
+        "Take a break and watch a movie",
+        "Read a few pages from a book",
+        "Play an instrument",
+        "Take a car ride",
+        "Make an omelette",
+        "Read through the news",
+        "Listen to music and study",
+    ],
+    career: [
+        "Improve your portfolio",
+        "Improve your resume",
+        "Network with coworkers",
+        "Complete a project",
     ]
 }
 
