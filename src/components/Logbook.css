@@ -1,0 +1,19 @@
+.logbook-container {
+    margin-top:10px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.logbook-container h2 span {
+    color:lightcoral;
+    font-weight:bold;
+}
+
+.logbook {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}

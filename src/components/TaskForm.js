@@ -5,7 +5,6 @@ import { Button, Spinner } from 'reactstrap'
 import './TaskForm.css'
 
 const TaskForm = props => {
-    const [formClosed, setFormClosed] = useState(true);
     const [failure, setFailure] = useState(false);
     const [values, setValues] = useState({
         taskName: "",
@@ -62,9 +61,9 @@ const TaskForm = props => {
     }
 
     return (
-        <div className="task-form" onClick={() => setFormClosed(!formClosed)}>
-            <div className={formClosed ? "plus shown" : "plus hidden"}><i className="fas fa-plus" /></div>
-            <form className={formClosed ? "" : "open"} autoComplete="off" onSubmit={handleSubmit}>
+        <div className="task-form" onClick={() => props.setFormClosed(!props.formClosed)}>
+            <div className={props.formClosed ? "plus shown" : "plus hidden"}><i className="fas fa-plus" /></div>
+            <form className={props.formClosed ? "" : "open"} autoComplete="off" onSubmit={handleSubmit}>
                 <div className="inputs">
                     <div className="input" onClick={e => e.stopPropagation()}>
                         <label style={failure ? {color:"red"} : {color:"black"}} htmlFor="name">Task</label>
@@ -86,7 +85,7 @@ const TaskForm = props => {
                         <label htmlFor="description">Notes</label>
                         <textarea type="text" id="description" name="description" onChange={handleChanges} value={values.description}/>
                     </div>
-                    <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" >Add Task</Button>}</div>
+                    <div onClick={e => e.stopPropagation()}>{props.isPosting ? <Spinner color="primary"/> : <Button type="submit" color="danger">Add Task</Button>}</div>
                     <div>{(props.error.length > 0) && props.error}</div>
                 </div>
             </form>
@@ -98,7 +97,7 @@ const mapStateToProps = state => {
     return {
         tasks: state.tasks,
         isPosting: state.data.isPosting,
-        error: state.data.error
+        error: state.data.postError
     }
 }
 

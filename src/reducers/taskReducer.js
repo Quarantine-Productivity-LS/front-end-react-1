@@ -1,11 +1,14 @@
-import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, DELETE_DATA, SET_ALL_TASKS, SET_ERROR } from '../actions/taskActions'
+import { FETCH_DATA, POST_DATA, SET_ALL_TASKS, SET_ERROR, EDIT_DATA } from '../actions/taskActions'
 
 const initialState = {
     data: {
         isFetching: false,
         isPosting: false,
         isDeleting: false,
-        error: ""
+        isEditing: false,
+        fetchError: "",
+        postError: "",
+        deleteError: ""
     },
     username: "",
     tasks : [
@@ -36,6 +39,57 @@ const initialState = {
     ],
 }
 
+export const considerations = {
+    exercise: [
+        "Go for a jog",
+        "Do 50 push-ups",
+        "Run on treadmill",
+        "Evening walk around the neighborhood",
+        "Do 50 squats",
+        "Do 50 pull-ups",
+        "Wall-sits",
+        "Do 50 crunches",
+        "Do 50 Russian twists",
+        "Ride on eliptical bike",
+        "Ride bicycle around the neighborhood",
+        "Work out with dumbbells",
+        "Work out with a barbell",
+        "Do 10 sets of deadlifts"
+    ],
+    learning: [
+        "Watch a history documentary",
+        "Watch a nature documentary",
+        "Read a chapter out of your favorite book",
+        "Watch a 3D modeling tutorial",
+        "Watch a drawing tutorial",
+        "Learn about C++",
+        "Learn about C#",
+        "Learn about Python",
+        "Watch a YouTube science show",
+        "Research an interesting topic",
+        "Look up math exercises",
+        "Practice an instrument",
+        "Read through the news"
+
+    ],
+    lounging: [
+        "Make a sandwich",
+        "Take a break and watch a movie",
+        "Read a few pages from a book",
+        "Play an instrument",
+        "Take a car ride",
+        "Make an omelette",
+        "Read through the news",
+        "Listen to music and study",
+    ],
+    career: [
+        "Improve your portfolio",
+        "Improve your resume",
+        "Network with coworkers",
+        "Complete a project",
+    ]
+}
+
 export const taskReducer = (state = initialState, action) => {
     switch(action.type) {
         case FETCH_DATA:
@@ -56,7 +110,7 @@ export const taskReducer = (state = initialState, action) => {
                     error: ""
                 }
             }
-        case DELETE_DATA:
+        case EDIT_DATA:
             return {
                 ...state,
                 data: {
@@ -87,12 +141,6 @@ export const taskReducer = (state = initialState, action) => {
                     isDeleting: false,
                     error: ""
                 }
-            }
-        case TOGGLE_COMPLETION:
-            return {
-                ...state,
-                data: {...state.data},
-                tasks: action.payload
             }
         default:
             return {
