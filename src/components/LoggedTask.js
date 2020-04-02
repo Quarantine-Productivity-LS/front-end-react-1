@@ -26,8 +26,8 @@ const LoggedTask = props => {
                 </div>
                 <div>{props.task.taskName}</div>
             </div>
-            <div>{props.task.duration} minutes</div>
-            <div><Moment date={moment(props.task.due)} format="MMM Do, YYYY"/></div>
+            <div>{(props.task.duration) ? `${props.task.duration} minutes` : " "}</div>
+            <div>{(props.task.due) ? <Moment date={moment(props.task.due)} format="MMM Do, YYYY"/> : " "}</div>
         </div>
     )
 }

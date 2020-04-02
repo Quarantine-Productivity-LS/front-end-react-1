@@ -88,7 +88,7 @@ export const editTask = (tasks, values) => dispatch => {
         ...values,
         duration: duration,
         tags: values.tags.split(" ").join(""),
-        due: (values.due.length > 0) ? values.due : null
+        due: (values.due === null || values.due.length > 0) ? values.due : null
     }
     console.log(newTask);
     axios.put(`https://quarantine-productivity.herokuapp.com/api/tasks/${values.id}`, newTask).then(response => {

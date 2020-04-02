@@ -25,6 +25,13 @@ const Considerations = props => {
         })
     }
 
+    const handleChange = event => {
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value
+        })
+    }
+
     const handleSubmit = event => {
         event.preventDefault();
         if (values.taskName.length > 0) {
@@ -57,23 +64,23 @@ const Considerations = props => {
                     <h3>{activeTopic}</h3>
                     <div className="input">
                     <label style={failure ? {color:"red"} : {color:"black"}} htmlFor="taskName">Task</label>
-                        <input type="text" name="taskName" id="taskName" value={values.taskName}/>  
+                        <input type="text" name="taskName" id="taskName" value={values.taskName} onChange={handleChange}/>  
                     </div>
                     <div className="input">
                         <label htmlFor="tags">Tags</label>
-                        <input type="text" name="tags" id="tags" value={values.tags}/>  
+                        <input type="text" name="tags" id="tags" value={values.tags} onChange={handleChange}/>  
                     </div>
                     <div className="input">
                         <label htmlFor="duration">Duration</label>
-                        <input type="text" name="duration" id="duration" placeholder="minutes" value={values.duration}/>  
+                        <input type="text" name="duration" id="duration" placeholder="minutes" value={values.duration} onChange={handleChange}/>  
                     </div>
                     <div className="input">
                         <label htmlFor="due">Due by</label>
-                        <input type="due" name="due" id="due" value={values.due}/>  
+                        <input type="date" name="due" id="due" value={values.due} onChange={handleChange}/>  
                     </div>
                     <div className="input">
                         <label htmlFor="description">Notes</label>
-                        <textarea name="description" id="description" value={values.description}/>  
+                        <textarea name="description" id="description" value={values.description} onChange={handleChange}/>  
                     </div>
                     <Button type="submit" color="danger">Add Task</Button>
                     <Button type="button" color="danger" onClick={() => updateValues(activeTopic)}>Get Another Consideration</Button>
