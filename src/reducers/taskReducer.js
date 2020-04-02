@@ -1,4 +1,4 @@
-import { TOGGLE_COMPLETION, FETCH_DATA, POST_DATA, SET_ALL_TASKS, SET_ERROR, EDIT_DATA } from '../actions/taskActions'
+import { FETCH_DATA, POST_DATA, SET_ALL_TASKS, SET_ERROR, EDIT_DATA } from '../actions/taskActions'
 
 const initialState = {
     data: {
@@ -90,12 +90,6 @@ export const taskReducer = (state = initialState, action) => {
                     isDeleting: false,
                     error: ""
                 }
-            }
-        case TOGGLE_COMPLETION:
-            return {
-                ...state,
-                data: {...state.data},
-                tasks: action.payload
             }
         default:
             return {

@@ -27,22 +27,23 @@ const TaskList = props => {
         let mostRecentDate = "";
         let newDatesMap = [];
         if (props.tasks.length > 0) {
-            console.log("got data", props.tasks);
-            mostRecentDate = props.tasks[0].due;
-            if (mostRecentDate !== null) {
-                newDatesMap.push({
-                    id: props.tasks[0].id,
-                    date: props.tasks[0].due
-                })
-            }
-            else {
-                newDatesMap.push({
-                    id: props.tasks[0].id,
-                    date: "Anytime"
-                })
+            if (!props.tasks[0].completed) {
+                mostRecentDate = props.tasks[0].due;
+                if (mostRecentDate !== null) {
+                    newDatesMap.push({
+                        id: props.tasks[0].id,
+                        date: props.tasks[0].due
+                    })
+                }
+                else {
+                    newDatesMap.push({
+                        id: props.tasks[0].id,
+                        date: "Anytime"
+                    })
+                }
             }
             props.tasks.forEach(task => {
-                if (task.due !== mostRecentDate) {
+                if ((task.due !== mostRecentDate) && (!task.completed)) {
                     newDatesMap.push({
                         id: task.id,
                         date: task.due
@@ -107,7 +108,7 @@ const TaskList = props => {
                                 return (
                                     <div key={task.id}>
                                         {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
-                                        <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
+                                        {!task.completed && <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>}
                                     </div>
                                 )
                             })}

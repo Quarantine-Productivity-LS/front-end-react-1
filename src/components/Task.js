@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toggleCompletion, deleteTask, editTask } from '../actions/taskActions'
 import { connect } from 'react-redux'
 import { Button, Spinner } from 'reactstrap'
@@ -6,6 +6,7 @@ import './Task.css'
 
 const Task = props => {
     const [expanded, setExpanded] = useState(false);
+    const [completed, setCompleted] = useState(props.task.completed)
     const [editing, setEditing] = useState(false);
     const [values, setValues] = useState({
         id: props.task.id,
@@ -15,6 +16,11 @@ const Task = props => {
         due: props.task.due,
         duration: props.task.duration,
     })
+
+    useEffect(() => {
+        setCompleted(props.task.completed);
+    }, [props.task.completed])
+
     const handleChanges = event => {
         event.stopPropagation();
         setValues({
@@ -24,7 +30,13 @@ const Task = props => {
     }
     const handleCheck = event => {
         event.stopPropagation();
-        props.toggleCompletion(props.tasks, props.task.id);
+        setCompleted(!completed);
+        setTimeout(() => {
+            props.editTask(props.tasks, {
+                ...props.task,
+                completed: !props.task.completed
+            })
+        }, 1000)
     }
     const handleDelete = event => {
         event.stopPropagation();
@@ -49,10 +61,10 @@ const Task = props => {
     }
     return (
         <div className={expanded ? "task-container expanded" : "task-container"} onClick={handleExpansion}>
-            <div className={props.task.completed ? "shown-info finished" : "shown-info"}>
+            <div className={completed ? "shown-info finished" : "shown-info"}>
                 <div className="task">
-                    <div className={props.task.completed ? "checkbox completed" : "checkbox"} onClick={handleCheck}>
-                    <div className={props.task.completed ? "checkmark" : "checkmark hidden"}>{props.task.completed && <i className="fas fa-check"></i>}</div>
+                    <div className={completed ? "checkbox completed" : "checkbox"} onClick={handleCheck}>
+                    <div className={completed ? "checkmark" : "checkmark hidden"}>{completed && <i className="fas fa-check"></i>}</div>
                     </div>
                     {!editing ? <div>{props.task.taskName}</div> : 
                     <input type="text" id="taskName" name="taskName" value={values.taskName} onClick={e => e.stopPropagation()} onChange={handleChanges} />}
@@ -91,4 +103,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { toggleCompletion, deleteTask, editTask })(Task)
+export default connect(mapStateToProps, { deleteTask, editTask })(Task)

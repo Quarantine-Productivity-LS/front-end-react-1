@@ -27,6 +27,16 @@ const Header = props => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar style={{display:"flex", justifyContent:"flex-end", width:"900%"}}>
             <NavItem>
+              <Link to="/tasks" style={{ color: "#fff", marginRight: "15px" }}>
+                Tasks
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/logbook" style={{ color: "#fff", marginRight: "15px" }}>
+                Logbook
+              </Link>
+            </NavItem>
+            <NavItem>
               <Link to="/" style={{ color: "#fff", marginRight: "15px" }}>
                 Login
               </Link>

@@ -1,0 +1,8 @@
+.logbook-container {
+    margin-top:10px;
+}
+
+.logbook-container h2 span {
+    color:lightcoral;
+    font-weight:bold;
+}
