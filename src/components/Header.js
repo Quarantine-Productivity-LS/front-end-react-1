@@ -42,13 +42,8 @@ const Header = props => {
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/" style={{ color: "#fff", marginRight: "15px" }}>
-                Login
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/register" style={{ color: "#fff" }}>
-                Register
+              <Link to="/" style={{ color: "#fff", marginRight: "15px" }} onClick={() => localStorage.clear()}>
+                Sign Out
               </Link>
             </NavItem>
           </Nav>

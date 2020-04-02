@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -9,11 +10,11 @@ const LoginPage = ({ errors, touched, isSubmitting }) => {
       <h5 className="loginTitle">Log in</h5>
       <Field
         className="input"
-        name="email"
-        type="email"
-        placeholder="Email"
+        name="username"
+        type="username"
+        placeholder="username"
       ></Field>
-      {touched.email && errors.email && <span>{" " + errors.email}</span>}
+      {touched.username && errors.username && <span>{" " + errors.username}</span>}
       <br />
       <Field
         className="input"
@@ -25,7 +26,7 @@ const LoginPage = ({ errors, touched, isSubmitting }) => {
         <span>{" " + errors.password}</span>
       )}
       <br />
-      <button className="loginBtn" disabled={isSubmitting}>
+      <button type="submit" className="loginBtn" disabled={isSubmitting}>
         SUBMIT
       </button>
       <p className="change">
@@ -36,29 +37,39 @@ const LoginPage = ({ errors, touched, isSubmitting }) => {
 };
 
 const FormikLoginPage = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ username, password }) {
     return {
-      email: email || "",
+      username: username || "",
       password: password || ""
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email("Email is not valid.")
-      .required("Email is required."),
-    password: Yup.string()
-      .min(4)
-      .required()
+    // email: Yup.string()
+    //   .email("Email is not valid.")
+    //   .required("Email is required."),
+    // password: Yup.string()
+    //   .min(4)
+    //   .required()
   }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-    setTimeout(() => {
-      if (values.email === "test@gmail.com") {
-        setErrors({ email: "That email is already taken" });
-      } else {
-        resetForm();
-      }
-      setSubmitting(false);
-    }, 1000);
+  handleSubmit(values, bag) {
+    console.log(values);
+    axios.post("https://quarantine-productivity.herokuapp.com/api/auth/login", values)
+    .then(response => {
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
+      bag.props.pushUser("/tasks");
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    // setTimeout(() => {
+    //   if (values.username === "test@gmail.com") {
+    //     setErrors({ username: "That username is already taken" });
+    //   } else {
+    //     resetForm();
+    //   }
+    //   setSubmitting(false);
+    // }, 1000);
   }
 })(LoginPage);
 
