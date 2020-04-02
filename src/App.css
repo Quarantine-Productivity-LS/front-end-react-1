@@ -41,7 +41,7 @@ body {
 .header {
   width: 100%;
   background-size: cover;
-  background-image: url("./header.jpeg");
+  background-image: url("./img/header.jpeg");
 }
 .menu{
   display: flex;
