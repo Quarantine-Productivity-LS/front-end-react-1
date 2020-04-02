@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { toggleCompletion, deleteTask, editTask } from '../actions/taskActions'
+import { deleteTask, editTask } from '../actions/taskActions'
 import { connect } from 'react-redux'
 import { Button, Spinner } from 'reactstrap'
 import './Task.css'
@@ -64,7 +64,7 @@ const Task = props => {
             <div className={completed ? "shown-info finished" : "shown-info"}>
                 <div className="task">
                     <div className={completed ? "checkbox completed" : "checkbox"} onClick={handleCheck}>
-                    <div className={completed ? "checkmark" : "checkmark hidden"}>{completed && <i className="fas fa-check"></i>}</div>
+                        <div className={completed ? "checkmark" : "checkmark hidden"}>{completed && <i className="fas fa-check"></i>}</div>
                     </div>
                     {!editing ? <div>{props.task.taskName}</div> : 
                     <input type="text" id="taskName" name="taskName" value={values.taskName} onClick={e => e.stopPropagation()} onChange={handleChanges} />}

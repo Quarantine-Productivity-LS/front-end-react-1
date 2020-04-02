@@ -68,7 +68,7 @@ const TaskList = props => {
                             alreadyPresent = true;
                         }
                     })
-                    if ((alreadyPresent === false) && (taskTag !== "")) {
+                    if ((alreadyPresent === false) && (taskTag !== "") && (!task.completed)) {
                         tags.push(taskTag);
                     }
                 })
@@ -119,7 +119,7 @@ const TaskList = props => {
                                 {props.tasks.map(task => {
                                     let match = false;
                                     task.tags.split(",").forEach(tag => {
-                                        if (tag === selectedTag) match = true;
+                                        if ((tag === selectedTag) && (!task.completed)) match = true;
                                     })
                                     return (
                                         <div key={task.id}>
