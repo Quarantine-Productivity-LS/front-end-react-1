@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 import { PrivateRoute } from './utils/PrivateRoute'
 import Header from './components/Header'
 import TaskList from './components/TaskList'
@@ -10,6 +10,10 @@ import FormikRegisterPage from './components/Register'
 import './App.css';
 
 const App = () => {
+  const { push } = useHistory();
+  const pushUser = url => {
+    push(url);
+  }
   return (
     <div className="appPage">
       <Header/>
@@ -17,8 +21,8 @@ const App = () => {
         <PrivateRoute path="/tasks" component={TaskList} />
         <PrivateRoute path="/logbook" component={Logbook} />
         <PrivateRoute path="/considerations" component={Considerations} />
-        <Route path="/register"><FormikRegisterPage /></Route>
-        <Route path="/"><FormikLoginPage /></Route>
+        <Route path="/register"><FormikRegisterPage pushUser={pushUser}/></Route>
+        <Route path="/"><FormikLoginPage pushUser={pushUser}/></Route>
       </Switch>
     </div>
   );

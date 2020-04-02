@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { withFormik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -7,7 +8,7 @@ const RegisterPage = ({ touched, errors, isSubmitting }) => {
   return (
     <Form className="register">
       <h5>Create Account</h5>
-      <p>Use your email for registration</p>
+      <p>Use your username for registration</p>
       <Field
         className="input"
         name="fname"
@@ -26,11 +27,11 @@ const RegisterPage = ({ touched, errors, isSubmitting }) => {
       <br />
       <Field
         className="input"
-        name="email"
-        type="email"
-        placeholder="Email"
+        name="username"
+        type="username"
+        placeholder="username"
       ></Field>
-      {touched.email && errors.email && <span>{" " + errors.email}</span>}
+      {touched.username && errors.username && <span>{" " + errors.username}</span>}
       <br />
       <Field
         className="input"
@@ -53,33 +54,36 @@ const RegisterPage = ({ touched, errors, isSubmitting }) => {
 };
 
 const FormikRegisterPage = withFormik({
-  mapPropsToValues({ email, password, fname, lname }) {
+  mapPropsToValues({ username, password, fname, lname }) {
     return {
-      email: email || "",
+      username: username || "",
       password: password || "",
       fname: fname || "",
       lname: lname || ""
     };
   },
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email("Email is not valid.")
-      .required("Email is required."),
+    username: Yup.string()
+      .required("Username is required."),
     password: Yup.string()
       .min(4)
       .required(),
     fname: Yup.string().required("First name is required."),
     lname: Yup.string().required("Last name is required.")
   }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-    setTimeout(() => {
-      if (values.email === "test@gmail.com") {
-        setErrors({ email: "That email is already taken" });
-      } else {
-        resetForm();
-      }
-      setSubmitting(false);
-    }, 1000);
+  handleSubmit(values, bag) {
+    const newUser = {
+      username: values.username,
+      password: values.password
+    }
+    axios.post("https://quarantine-productivity.herokuapp.com/api/auth/register", newUser)
+    .then(response => {
+      console.log(response);
+      bag.props.pushUser("/");
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 })(RegisterPage);
 
