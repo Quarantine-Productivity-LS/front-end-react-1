@@ -37,6 +37,11 @@ const Header = props => {
               </Link>
             </NavItem>
             <NavItem>
+              <Link to="/considerations" style={{ color: "#fff", marginRight: "15px" }}>
+                Considerations
+              </Link>
+            </NavItem>
+            <NavItem>
               <Link to="/" style={{ color: "#fff", marginRight: "15px" }}>
                 Login
               </Link>

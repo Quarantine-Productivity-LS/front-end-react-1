@@ -1,0 +1,11 @@
+.considerations-container {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:10px;
+}
+
+.considerations-container p {
+    font-weight:lighter;
+    font-size:1rem;
+}

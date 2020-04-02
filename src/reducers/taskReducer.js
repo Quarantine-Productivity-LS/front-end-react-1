@@ -39,6 +39,24 @@ const initialState = {
     ],
 }
 
+export const considerations = {
+    exercise: [
+        "Go for a jog",
+        "Do 50 push-ups",
+        "Run on treadmill",
+        "Evening walk around the neighborhood",
+        "Do 50 squats",
+        "Do 50 pull-ups",
+        "Wall-sits",
+        "Do 50 crunches",
+        "Do 50 Russian twists"
+    ],
+    learning: [
+        "Watch a documentary",
+        "Read a chapter out of your favorite book"
+    ]
+}
+
 export const taskReducer = (state = initialState, action) => {
     switch(action.type) {
         case FETCH_DATA:

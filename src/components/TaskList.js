@@ -53,7 +53,7 @@ const TaskList = props => {
             })
         }
         setDatesMap(newDatesMap);
-    }, [props.tasks])
+    }, [props.tasks, activeTab])
 
     // set up tags
     useEffect(() => {
