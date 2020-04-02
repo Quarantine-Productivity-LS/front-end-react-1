@@ -37,7 +37,7 @@
 }
 
 .task-form form button {
-    background-color:cornflowerblue;
+    border: 1px solid lightcoral;
 }
 
 .task-form form.open {
@@ -50,12 +50,13 @@
     align-items:center;
 }
 
-.input {
+.inputs .input {
     display:flex;
     justify-content:space-between;
     align-items:center;
     width:35%;
     margin-bottom:10px;
+    background-color:inherit;
 }
 
 .input label {

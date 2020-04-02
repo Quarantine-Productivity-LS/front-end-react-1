@@ -2,6 +2,8 @@
     max-height:2.2rem;
     overflow:hidden;
     transition:.3s;
+    font-size:1rem;
+    font-family: "Montserrat", sans-serif;
 }
 
 .task-container:hover {
@@ -32,7 +34,17 @@
 .hidden-info > div:last-child {
     display:flex;
     justify-content:center;
-    width:10%;
+    width:25%;
+}
+
+.hidden-info > div:last-child .buttons {
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.hidden-info > div:last-child button {
+    margin:5px;
 }
 
 .task {
@@ -46,7 +58,11 @@
     color:gray;
     font-size:.8rem;
     display:flex;
-    width:35%;
+    width:45%;
+}
+
+.duration {
+    width:10%;
 }
 
 .tag {
@@ -57,8 +73,8 @@
 }
 
 .tag:hover, .active-tag {
-    border:.05rem solid cornflowerblue;
-    color:cornflowerblue;
+    border:.05rem solid lightcoral;
+    color:lightcoral;
 }
 
 .checkbox {
@@ -68,7 +84,7 @@
     width:15px;
     height:15px;
     transition:.2s;
-    font-size:.2rem;
+    font-size:.5rem;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -81,8 +97,8 @@
 }
 
 .completed {
-    background-color:cornflowerblue;
-    border:1px solid cornflowerblue;
+    background-color:lightcoral;
+    border:1px solid lightcoral;
 }
 
 .finished {
@@ -91,9 +107,49 @@
 
 .checkmark {
     overflow:hidden;
+    height:100%;
     transition:.2s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .hidden {
     height:0;
+}
+
+/* inputs */
+
+.shown-info input, .hidden-info input {
+    font-size:inherit;
+    outline:none;
+    border:0;
+    background-color:inherit;
+    border-radius:5px;
+    padding:0;
+}
+
+.shown-info input:focus, .hidden-info input:focus {
+    background-color:white;
+    border:1px solid lightgray;
+}
+
+.shown-info input#tags {
+    font-weight:lighter;
+}
+
+.shown-info input#taskName {
+    width:100%;
+}
+
+.shown-info input#duration {
+    width:5%;
+    text-align:center;
+}
+
+.hidden-info input#description {
+    width:100%;
+    height:100%;
+    font-weight:inherit;
+    padding:0;
 }

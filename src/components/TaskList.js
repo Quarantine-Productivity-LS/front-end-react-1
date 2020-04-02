@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Task from './Task'
+import Date from './Date'
 import TaskForm from './TaskForm'
 import { connect } from 'react-redux'
 import { Nav, NavItem, NavLink, TabContent, TabPane, Spinner } from 'reactstrap'
@@ -11,13 +12,50 @@ const TaskList = props => {
     const { getData } = props;
     const [activeTab, setActiveTab] = useState('all');
     const [allTags, setTags] = useState([]);
+    const [formClosed, setFormClosed] = useState(true);
+    const [datesMap, setDatesMap] = useState([])
 
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
+    // get data
     useEffect(() => getData(), [getData])
 
+    // set up dates
+    useEffect(() => {
+        let mostRecentDate = "";
+        let newDatesMap = [];
+        if (props.tasks.length > 0) {
+            if (!props.tasks[0].completed) {
+                mostRecentDate = props.tasks[0].due;
+                if (mostRecentDate !== null) {
+                    newDatesMap.push({
+                        id: props.tasks[0].id,
+                        date: props.tasks[0].due
+                    })
+                }
+                else {
+                    newDatesMap.push({
+                        id: props.tasks[0].id,
+                        date: "Anytime"
+                    })
+                }
+            }
+            props.tasks.forEach(task => {
+                if ((task.due !== mostRecentDate) && (!task.completed)) {
+                    newDatesMap.push({
+                        id: task.id,
+                        date: task.due
+                    })
+                    mostRecentDate = task.due;
+                }
+            })
+        }
+        setDatesMap(newDatesMap);
+    }, [props.tasks, activeTab])
+
+    // set up tags
     useEffect(() => {
         console.log(props.tasks);
         const findTags = () => {
@@ -30,7 +68,7 @@ const TaskList = props => {
                             alreadyPresent = true;
                         }
                     })
-                    if (alreadyPresent === false) {
+                    if ((alreadyPresent === false) && (taskTag !== "") && (!task.completed)) {
                         tags.push(taskTag);
                     }
                 })
@@ -39,12 +77,11 @@ const TaskList = props => {
         }
         findTags();
     }, [props.tasks])
-
     return (
         <div className="task-list-container">
             <div className="task-list">
                 <h2>Tasks</h2>
-                {props.data.isFetching ? <Spinner color="primary"/> : <div className="nav-container">
+                {props.isFetching ? (<Spinner color="primary"/>) : <div className="nav-container">
                     <Nav tabs>
                         <NavItem>
                             <NavLink
@@ -67,7 +104,14 @@ const TaskList = props => {
                     </Nav>
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="all">
-                            {props.tasks.map(task => <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>)}
+                            {props.tasks.map(task => {
+                                return (
+                                    <div key={task.id}>
+                                        {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
+                                        {!task.completed && <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>}
+                                    </div>
+                                )
+                            })}
                         </TabPane>
                         {allTags.map(selectedTag => {
                         return (
@@ -75,19 +119,21 @@ const TaskList = props => {
                                 {props.tasks.map(task => {
                                     let match = false;
                                     task.tags.split(",").forEach(tag => {
-                                        if (tag === selectedTag) match = true;
+                                        if ((tag === selectedTag) && (!task.completed)) match = true;
                                     })
-                                    return (match && 
-                                        (
-                                        <Task key={task.id} task={task} toggleTag={toggle} activeTab={activeTab}/>
-                                    ))
+                                    return (
+                                        <div key={task.id}>
+                                            {datesMap.map(date => (date.id === task.id) && <Date date={date.date}/>)}
+                                            {match && <Task task={task} toggleTag={toggle} activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>}
+                                        </div>
+                                    )
                                 })}
                             </TabPane>
                         )
                     })}
                     </TabContent>
                 </div>}
-                <TaskForm activeTab={activeTab} />
+                <TaskForm activeTab={activeTab} formClosed={formClosed} setFormClosed={setFormClosed}/>
             </div>
         </div>
     )
@@ -96,9 +142,7 @@ const TaskList = props => {
 const mapStateToProps = state => {
     return {
         tasks: state.tasks,
-        data: {
-            isFetching: state.data.isFetching
-        }
+        isFetching: state.data.isFetching,
     }
 }
 
