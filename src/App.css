@@ -46,6 +46,7 @@ body {
 .menu{
   display: flex;
   justify-content: flex-end;
+  align-items:center;
 }
 
 .btn {
@@ -98,4 +99,14 @@ p{
 }
 .change{
   margin-top: 10px;
+}
+
+.navbar-brand {
+  fill:white;
+  display:flex;
+  align-items:center;
+}
+
+.navbar-brand svg {
+  margin-right:10px;
 }

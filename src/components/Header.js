@@ -8,6 +8,7 @@ import {
   NavItem
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,7 @@ const Header = props => {
           href="/"
           style={{ color: "AliceBlue", fontWeight: "bold" }}
         >
+          <ReactSVG src="qp.svg" />
           Quarantine Productivity
         </NavbarBrand>
         <NavbarToggler onClick={toggle} style={{backgroundColor:'white', opacity:'0.9'}}/>
