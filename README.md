@@ -2,7 +2,7 @@
 
 ## Description
 
-People who aren't used to being around the house might find some frustration while either quarantining or just social-distancing during the COVID-19 outbreak period. This application is meant specifically to be a task manager for those who are used to a schedule with less time in the house.
+People who aren't used to being around the house might find some frustration while either quarantining or just social-distancing during the COVID-19 outbreak period. This application is meant specifically to be a task manager for those who are used to a schedule with less time at home.
 
 ## Features
 
